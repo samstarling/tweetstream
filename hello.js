@@ -1,7 +1,7 @@
 var app = require('express').createServer()
   , io = require('socket.io').listen(app);
 
-app.listen(5000);
+app.listen(31019);
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
