@@ -1,4 +1,4 @@
-var app = require('express').createServer()
+/*var app = require('express').createServer()
   , io = require('socket.io').listen(app);
 
 app.listen(31019);
@@ -22,5 +22,18 @@ io.sockets.on('connection', function (socket) {
           socket.emit('tweet', data);
       });
   });
+});*/
+
+var express = require('express');
+
+var app = express.createServer(express.logger());
+
+app.get('/', function(request, response) {
+  response.send('Hello World!');
+});
+
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
 });
 
