@@ -1,5 +1,7 @@
-/*var app = require('express').createServer()
+var app = require('express').createServer()
   , io = require('socket.io').listen(app);
+
+io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
 app.listen(31019);
 
@@ -22,9 +24,9 @@ io.sockets.on('connection', function (socket) {
           socket.emit('tweet', data);
       });
   });
-});*/
+});
 
-var express = require('express');
+/*var express = require('express');
 
 var app = express.createServer(express.logger());
 
@@ -36,4 +38,4 @@ var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-
+*/
