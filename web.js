@@ -1,15 +1,21 @@
-var app = require('express').createServer(), io = require('socket.io').listen(app);
+var express = require('express'); 
+var app = express.createServer();
+var io = require('socket.io').listen(app);
 
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
 app.listen(process.env.PORT || 3000);
 
+/*app.configure('development', function(){
+  app.use(express.static(__dirname + '/public'));
+});*/
+
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/static/index.html');
+  res.sendfile(__dirname + '/public/index.html');
 });
 
 app.get('/style.css', function (req, res) {
-  res.sendfile(__dirname + '/static/style.css');
+  res.sendfile(__dirname + '/public/style.css');
 });
 
 var sys = require('sys');
