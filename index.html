@@ -1,7 +1,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect('http://localhost');
+  var socket = io.connect('http://quiet-moon-9241.herokuapp.com');
   socket.on('tweet', function (data) {
     if(data.text) {
       $("#tweets").prepend('<li>' + data.text + '</li>');
