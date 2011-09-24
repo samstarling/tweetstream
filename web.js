@@ -3,7 +3,7 @@ var app = require('express').createServer()
 
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
-app.listen(31019);
+app.listen(process.env.PORT || 3000);
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
