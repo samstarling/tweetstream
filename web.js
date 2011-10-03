@@ -11,7 +11,7 @@ app.listen(process.env.PORT || 3000);
 app.get('/', function (req, res) {
   script_url = 'http://localhost';
   if(process.env.PORT) {
-      script_url = 'http://node-twitterfall.herokuapp.com';
+      script_url = 'http://tweetstream.herokuapp.com';
   }
   res.render(__dirname + '/public/index.html', {script_url: script_url});
 });
