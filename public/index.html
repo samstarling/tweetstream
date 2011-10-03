@@ -1,44 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://node-twitterfall.herokuapp.com');
-      //var socket = io.connect('http://localhost');
+!!! 5
+html(lang="en")
+  head
+    title
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js')
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+    link(href='/style.css', rel='stylesheet', type='text/css')
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript')
+      var socket = io.connect('#{script_url}');
       socket.on('tweet', function (data) {
         if(data.text) {
-          $("#tweets").prepend('<div class="tweet"><p><span class="label">@' + data.user.screen_name + '</span> ' + data.text + '</p></div>');
+          var tweet = '<div class="tweet"><p><span class="label">@' + data.user.screen_name + '</span> ' + data.text + '</p></div>';
+          $(tweet).hide().prependTo("#tweets").fadeIn("slow");
+          $('#tweets div:gt(9)').hide();
         }
       });
-    </script>
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="content">
-        <div class="page-header">
-          <h1>Twitter Streaming <small>Created using Node.js</small></h1>
-        </div>
-        <div class="row">
-          <div class="span10">
-            <h2>Tweets</h2>
-            <div id="tweets"></div>
-          </div>
-          <div class="span4">
-            <h3>Secondary content</h3>
-          </div>
-        </div>
-      </div>
-      <footer>
-        
-      </footer>
-    </div>
-  </body>
-</html>
+  body
+    #container
+      h1 tweetstream
+      .content 
+        #tweets

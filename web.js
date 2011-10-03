@@ -4,14 +4,16 @@ var io = require('socket.io').listen(app);
 
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
+app.register('.html', require('jade'));
+app.set("view options", { layout: false });
 app.listen(process.env.PORT || 3000);
 
-/*app.configure('development', function(){
-  app.use(express.static(__dirname + '/public'));
-});*/
-
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/public/index.html');
+  script_url = 'http://localhost';
+  if(process.env.PORT) {
+      script_url = 'http://localhost';
+  }
+  res.render(__dirname + '/public/index.html', {script_url: script_url});
 });
 
 app.get('/style.css', function (req, res) {
@@ -28,8 +30,9 @@ var twit = new twitter({
 });
 
 io.sockets.on('connection', function (socket) {
-  twit.stream('user', {track:'BBC'}, function(stream) {
+  twit.stream('user', {track:'radio'}, function(stream) {
     stream.on('data', function (data) {
+      sys.puts(data.text);
       socket.emit('tweet', data);
     });
   });
