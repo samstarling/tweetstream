@@ -80,13 +80,13 @@ p {
     
     .tweet_image {
         padding: 0;
-        width: 18%;
+        width: 20%;
         margin: 0;
         float: left;
     }
     
     .tweet_text {
         padding: 0;
-        width: 82%;
+        width: 80%;
     }
 }
