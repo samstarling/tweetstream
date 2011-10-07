@@ -77,4 +77,16 @@ p {
         width: 90%;
         padding: 3% 5%;
     }
+    
+    .tweet_image {
+        padding: 0;
+        width: 18%;
+        margin: 0;
+        float: left;
+    }
+    
+    .tweet_text {
+        padding: 0;
+        width: 82%;
+    }
 }
