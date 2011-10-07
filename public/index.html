@@ -8,12 +8,20 @@ html(lang="en")
     link(href='/style.css', rel='stylesheet', type='text/css')
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript')
-      var socket = io.connect('#{script_url}');
+      var socket = io.connect('#{script_url}?q=abc');
       socket.on('tweet', function (data) {
         if(data.text) {
-          var tweet = '<div class="tweet"><p><span class="label">@' + data.user.screen_name + '</span> ' + data.text + '</p></div>';
-          $(tweet).hide().prependTo("#tweets").fadeIn("slow");
-          $('#tweets div:gt(9)').hide();
+          var tweet = '<div class="tweet"><div class="tweet_image"><img src="' + data.user.profile_image_url + '"/></div><div class="tweet_text"><p><b><span class="label">@' + 
+              data.user.screen_name + 
+              '</span></b><br/>' +
+              '' +
+              data.text +
+              '</p></div></div>';
+          $(tweet).hide().prependTo("#tweets").slideDown(500, function(){
+              $(this).find('div').fadeIn(300);
+          });
+          console.log(data);
+          $('#tweets div.tweet:gt(9)').hide();
         }
       });
   body
@@ -21,3 +29,4 @@ html(lang="en")
       h1 tweetstream
       .content 
         #tweets
+        .clearboth 
