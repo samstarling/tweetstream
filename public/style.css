@@ -1,12 +1,15 @@
 body {
-    margin: 0;
+    margin: 30px;
     font-family: 'Helvetica Neue', sans-serif;
+	font-weight: 200;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-	background: #222;
+	background: #073642;
+	color: #879DA3;
+	word-wrap: break-word;
 }
 
 h1, h2, h3, p {
@@ -15,10 +18,11 @@ h1, h2, h3, p {
     font-weight: 300;
 }
 
-h1 {
-    padding: 7px 20px 0 20px;
-    color: #aaa;
+#tweets span {
+	float: left;
 }
+
+
 
 p {
     word-wrap: break-word;
@@ -29,10 +33,7 @@ p {
 }
 
 #container {
-	padding: 30px;
 	font-size: 70px;
-	color: #ccc;
-	font-family: Nobile;
 }
 
 .clearboth {
@@ -44,11 +45,22 @@ p {
 }
 
 .username {
-	color: yellow;
+	color: #b58900;
 }
 
 .hashtag {
-	color: blue;
+	color: #2aa198;
+}
+
+.link {
+	color: #268bd2;
+	border-bottom: 2px solid;
+}
+
+.screen_name {
+	color: #586e75 !important;
+	font-size: 50px;
+	clear: left;
 }
 
 

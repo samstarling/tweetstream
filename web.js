@@ -23,15 +23,19 @@ app.get('/style.css', function (req, res) {
   res.sendfile(__dirname + '/public/style.css');
 });
 
+app.get('/tweets.js', function (req, res) {
+  res.sendfile(__dirname + '/public/tweets.js');
+});
+
 var twit = new twitter({
-  consumer_key: 'rVGHP96wJj5pJUI1BqFSOg',
-  consumer_secret: 'It4so4h8UIkocgSbjoo2h2nYWy20vNM3KcHdXsxSo',
-  access_token_key: '19527505-MMnDFFdORLJRYSgvKEFmNvwdWZsKCaZD5DGmNPYsR',
-  access_token_secret: 'FEEczuM3ciakJPwLPl1vFJLiYJeC8V2w3FHwQxSC0E'
+  consumer_key: 'zyg4gPhvZSqLn25x37oUyA',
+  consumer_secret: 'ymTIgmG5DhQzurEHsCD22pgdIFGWIysGT5SEwkuWCk',
+  access_token_key: '571728756-ViiabtEcHk3A2nPWagGHlC1DDauKtruBmdWKZLPE',
+  access_token_secret: '896I1bD2ahsHgnim3O5OOZG1uNUrFXwZb9VUzr4'
 });
 
 io.sockets.on('connection', function (socket) {
-  twit.stream('user', {track:'Bieber'}, function(stream) {
+  twit.stream('user', {track:'BBC'}, function(stream) {
     stream.on('data', function (data) {
       if(data.text) {
         data.split = data.text.split(" ")
