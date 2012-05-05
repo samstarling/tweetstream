@@ -1,10 +1,10 @@
 var socket = io.connect('#{script_url}?q=tweet');
 var ready = true;
 var regexp = /([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*))?/gi;
-var max_keep = 100;
+var max_keep = 20;
 var startup = true;
 var tweets = new Array();
-var display_for_ms = 3000;
+var display_for_ms = 8000;
       
 if (typeof String.prototype.startsWith != 'function') {
   String.prototype.startsWith = function (str){
@@ -17,7 +17,7 @@ function isUrl(s) {
 }
 
 function showNextTweet() {
-  var data = tweets.splice(0, 1)[0];
+  var data = tweets.shift();
   $("#number").html(tweets.length);
   if(data) {
     $('#tweet').fadeOut(100, function() {
@@ -44,8 +44,9 @@ function showNextTweet() {
 socket.on('tweet', function (data) {
   if(data.text) {
     tweets.push(data);
-    if(tweets.length >= max_keep) {
-      tweets.splice(max_keep - 1, 1);
+    if(tweets.length > max_keep) {
+      var evicted = tweets.splice(max_keep - 1, 1)[0];
+      $("#evicted_tweet").text(evicted.text);
     }
     if(startup) {
       showNextTweet();
