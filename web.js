@@ -35,7 +35,7 @@ var twit = new twitter({
 });
 
 io.sockets.on('connection', function (socket) {
-  twit.stream('user', {track:'BBC'}, function(stream) {
+  twit.stream('user', {track:'FA Cup'}, function(stream) {
     stream.on('data', function (data) {
       if(data.text) {
         data.split = data.text.split(" ")

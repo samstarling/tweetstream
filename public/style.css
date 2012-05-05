@@ -1,5 +1,5 @@
 body {
-    margin: 30px;
+    margin: 26px 30px 30px 30px;
     font-family: 'Helvetica Neue', sans-serif;
 	font-weight: 200;
     -webkit-user-select: none;
@@ -40,8 +40,16 @@ p {
     clear: both;
 }
 
-#tweets {
-    line-height: 1.6;
+#tweet {
+    line-height: 1.2;
+	text-shadow: 0px 2px #002b36;
+}
+
+.pending {
+	opacity: 0.3;
+	position: absolute;
+	bottom: 30px;
+	font-size: 11px;
 }
 
 .username {
