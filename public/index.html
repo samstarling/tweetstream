@@ -4,29 +4,37 @@ html(lang="en")
     title
     script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js')
     meta(name='viewport', content='width=device-width,user-scalable=no')
-    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Nobile', rel='stylesheet', type='text/css')
     link(href='/style.css', rel='stylesheet', type='text/css')
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript')
       var socket = io.connect('#{script_url}?q=abc');
+      var ready = true;
+      
+      if (typeof String.prototype.startsWith != 'function') {
+        String.prototype.startsWith = function (str){
+          return this.indexOf(str) == 0;
+        };
+      }
+      
       socket.on('tweet', function (data) {
-        if(data.text) {
-          var tweet = '<div class="tweet"><div class="tweet_image"><img src="' + data.user.profile_image_url + '"/></div><div class="tweet_text"><p><b><span class="label">@' + 
-              data.user.screen_name + 
-              '</span></b><br/>' +
-              '' +
-              data.text +
-              '</p></div></div>';
-          $(tweet).hide().prependTo("#tweets").slideDown(500, function(){
-              $(this).find('div').fadeIn(300);
+        if(data.text && ready == true) {
+          ready = false;
+          $('#tweet').html("");
+          var spans = '<span>' + data.split.join(' </span><span>') + '</span>';
+          $(spans).hide().appendTo('#tweet').each(function(i) {
+              if($(this).text().startsWith("@")) {
+                $(this).addClass('username');
+              } else if($(this).text().startsWith("#")) {
+                $(this).addClass('hashtag');
+              }
+              $(this).delay(60 * i).fadeIn(400);
           });
-          console.log(data);
-          $('#tweets div.tweet:gt(9)').hide();
+          setTimeout(function() { ready = true; }, 10000);
         }
       });
   body
     #container
-      h1 tweetstream
       .content 
-        #tweets
+        div#tweet
         .clearboth 

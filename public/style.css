@@ -6,6 +6,7 @@ body {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+	background: #222;
 }
 
 h1, h2, h3, p {
@@ -28,9 +29,10 @@ p {
 }
 
 #container {
-    width: 540px;
-    margin: 0 auto;
-    background: #eee;
+	padding: 30px;
+	font-size: 70px;
+	color: #ccc;
+	font-family: Nobile;
 }
 
 .clearboth {
@@ -38,13 +40,20 @@ p {
 }
 
 #tweets {
-    line-height: 1.4;
+    line-height: 1.6;
 }
 
+.username {
+	color: yellow;
+}
+
+.hashtag {
+	color: blue;
+}
+
+
 #tweets .tweet {
-    border-bottom: 1px solid #ddd;
     padding: 10px 20px 10px 20px;
-    width: 500px;
     float: left;
 }
 
@@ -61,7 +70,6 @@ p {
 }
 
 .tweet_text {
-    width: 440px;
     float: left;
 }
 

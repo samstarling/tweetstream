@@ -31,9 +31,12 @@ var twit = new twitter({
 });
 
 io.sockets.on('connection', function (socket) {
-  twit.stream('user', {track:'BBC'}, function(stream) {
+  twit.stream('user', {track:'Bieber'}, function(stream) {
     stream.on('data', function (data) {
-      socket.emit('tweet', data);
+      if(data.text) {
+        data.split = data.text.split(" ")
+        socket.emit('tweet', data);
+      }
     });
   });
 });
