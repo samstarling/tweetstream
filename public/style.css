@@ -45,15 +45,16 @@ p {
 	opacity: 0.3;
 	position: absolute;
 	bottom: 30px;
-	font-size: 11px;
-	line-height: 11px;
+	font-size: 12px;
+	line-height: 12px;
 }
 
 .evicted {
-	opacity: 0.3;
+	opacity: 0.1;
 	position: absolute;
-	bottom: 45px;
+	bottom: 48px;
 	font-size: 11px;
+	line-height: 12px;
 }
 
 

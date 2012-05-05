@@ -1,8 +1,8 @@
 !!! 5
 html(lang="en")
   head
-    title Tweetstream | FA Cup
-    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js')
+    title Tweetstream for "#{query}"
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
     meta(name='viewport', content='width=device-width,user-scalable=no')
     link(href='http://fonts.googleapis.com/css?family=Nobile', rel='stylesheet', type='text/css')
     link(href='/style.css', rel='stylesheet', type='text/css')
@@ -13,7 +13,10 @@ html(lang="en")
       .content 
         p.pending
           span#number 0
-          span &nbsp;tweets pending
+          span &nbsp;queued /&nbsp;
+          span#total_number 0
+          span &nbsp;total
+          
         p.evicted Evicted:&nbsp;
           span#evicted_tweet
         div#tweet
