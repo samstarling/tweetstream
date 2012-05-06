@@ -52,6 +52,10 @@ app.get('/tweets.js', function (req, res) {
   res.sendfile(__dirname + '/public/tweets.js');
 });
 
+app.get('/timeago.js', function (req, res) {
+  res.sendfile(__dirname + '/public/timeago.js');
+});
+
 var twit = new twitter({
   consumer_key: 'zyg4gPhvZSqLn25x37oUyA',
   consumer_secret: 'ymTIgmG5DhQzurEHsCD22pgdIFGWIysGT5SEwkuWCk',

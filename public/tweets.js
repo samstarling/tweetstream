@@ -1,6 +1,6 @@
 var socket = io.connect('#{script_url}?q=tweet');
 var ready = true;
-var re = /((^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?))/gi;
+var re = /((^|\s)((https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?))/gi;
 var max_keep = 100;
 var startup = true;
 var tweets = new Array();
@@ -18,7 +18,7 @@ function isUrl(s) {
 }
 
 function populateTweet(data) {
-  var spans = '<span>' + data.split.join('</span> <span>') + '</span><br/><span class="screen_name">@' + data.user.screen_name + '</span>';
+  var spans = '<span>' + data.split.join('</span> <span>') + '</span><br/><span class="screen_name">@' + data.user.screen_name + '</span> <span class="time_since">' + jQuery.timeago(data.created_at) + '</span>';
   $('#tweet').html("");
   $(spans).hide().appendTo('#tweet').each(function(i) {
     if($(this).text().startsWith("@") && !$(this).hasClass('screen_name')) {
@@ -36,8 +36,6 @@ function populateTweet(data) {
 }
 
 function clearAndPopulateNextTweet(data) {
-  //alert('cpnt' + data);
-  
   if($("#tweet span").length == 0) {
     populateTweet(data);
   } else {

@@ -68,7 +68,6 @@ p {
 
 .link {
 	color: #268bd2;
-	border-bottom: 2px solid;
 }
 
 .screen_name {
@@ -77,6 +76,13 @@ p {
 	clear: left;
 }
 
+.time_since {
+	font-weight: 100;
+	color: #586e75 !important;
+	font-size: 50px;
+	clear: left;
+	opacity: 0.4;
+}
 
 #tweets .tweet {
     padding: 10px 20px 10px 20px;
