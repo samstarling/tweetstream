@@ -13,6 +13,11 @@ app.listen(process.env.PORT || 3000);
 var io = require('socket.io').listen(app);
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.indexOf(str) == 0;
+  };
+}
 
 app.get('/', function (req, res) {
   
@@ -35,8 +40,10 @@ app.get('/', function (req, res) {
     twit.stream('user', {track: query}, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
-          data.split = data.text.split(" ")
-          socket.volatile.emit('tweet', data);
+          if(!data.text.startsWith("RT")) {
+            data.split = data.text.split(" ")
+            socket.volatile.emit('tweet', data);
+          }
         }
       });
     });
