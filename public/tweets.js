@@ -1,12 +1,12 @@
 var socket = io.connect('#{script_url}?q=tweet');
 var ready = true;
-var re = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-var max_keep = 20;
+var re = /((^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?))/gi;
+var max_keep = 100;
 var startup = true;
 var tweets = new Array();
-var display_for_ms = 6000;
+var display_for_ms = 5500;
 var total = 0;
-      
+
 if (typeof String.prototype.startsWith != 'function') {
   String.prototype.startsWith = function (str){
     return this.indexOf(str) == 0;
@@ -16,7 +16,6 @@ if (typeof String.prototype.startsWith != 'function') {
 function isUrl(s) {
   return re.test(s);
 }
-
 
 function populateTweet(data) {
   var spans = '<span>' + data.split.join('</span> <span>') + '</span><br/><span class="screen_name">@' + data.user.screen_name + '</span>';

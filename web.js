@@ -1,19 +1,20 @@
-// Imports
 var express = require('express');
 var sys = require('sys');
 var twitter = require('twitter');
+var logging = require('node-logging');
+
+logging.setLevel('error');
 
 var app = express.createServer();
 app.register('.html', require('jade'));
 app.set("view options", { layout: false });
 app.listen(process.env.PORT || 3000);
 
+var io = require('socket.io').listen(app);
+io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
+
+
 app.get('/', function (req, res) {
-  
-  var query = "bbc";
-  if(req.query["q"]) {
-    query = req.query["q"];
-  }
   
   script_url = 'http://localhost';
   if(process.env.PORT) {
@@ -25,16 +26,17 @@ app.get('/', function (req, res) {
     query: query
   });
   
-  var io = require('socket.io').listen(app);
-  io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
+  var query = "bbc";
+  if(req.query["q"]) {
+    query = req.query["q"];
+  }
   
   io.sockets.on('connection', function (socket) { 
-    console.log(socket);
     twit.stream('user', {track: query}, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
           data.split = data.text.split(" ")
-          socket.emit('tweet', data);
+          socket.volatile.emit('tweet', data);
         }
       });
     });
