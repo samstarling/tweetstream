@@ -38,12 +38,9 @@ app.get('/', function (req, res) {
   });
   
   var query = "from:@gmedia";
-  if(req.query["q"]) {
-    query = req.query["q"];
-  }
   
   io.sockets.on('connection', function (socket) { 
-    twit.stream('user', {track: query}, function(stream) {
+    twit.stream('user', {track: 'bbc'}, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
           if(!data.text.startsWith("RT")) {
