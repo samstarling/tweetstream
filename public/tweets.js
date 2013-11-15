@@ -18,7 +18,7 @@ function isUrl(s) {
 }
 
 function populateTweet(data) {
-  var spans = '<span>' + data.split.join('</span> <span>') + '</span><br/><span class="screen_name">@' + data.user.screen_name + '</span> <span class="time_since">' + jQuery.timeago(data.created_at) + '</span>';
+  var spans = '<span>' + data.split.join('&nbsp;</span><span>') + '</span><br/><span class="screen_name">@' + data.user.screen_name + '</span> <span class="time_since">' + jQuery.timeago(data.created_at) + '</span>';
   $('#tweet').html("");
   $(spans).hide().appendTo('#tweet').each(function(i) {
     if($(this).text().startsWith("@") && !$(this).hasClass('screen_name')) {
