@@ -1,15 +1,14 @@
 body {
     margin: 26px 30px 30px 30px;
     font-family: 'Helvetica Neue', sans-serif;
-	font-weight: 200;
+    font-weight: 200;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-	background: #073642;
-	color: #879DA3;
-	word-wrap: break-word;
+    background: #073642;
+    color: #879DA3;
 }
 
 h1, h2, h3, p {
@@ -18,7 +17,8 @@ h1, h2, h3, p {
     font-weight: 300;
 }
 
-#tweets span {
+span {
+  float: left;
   word-wrap: normal;
 }
 
@@ -73,29 +73,12 @@ h1, h2, h3, p {
 	font-weight: 100;
 	color: #586e75 !important;
 	font-size: 50px;
-	clear: left;
 	opacity: 0.4;
+  padding-left: 0.3em;
 }
 
 #tweets .tweet {
     padding: 10px 20px 10px 20px;
-    float: left;
-}
-
-.tweet_image {
-    width: 48px;
-    margin-right: 12px;
-    float: left;
-    padding-top: 2px;
-}
-
-.tweet_image img {
-    width: 48px;
-    height: 48px;
-}
-
-.tweet_text {
-    float: left;
 }
 
 .content {
@@ -109,13 +92,6 @@ h1, h2, h3, p {
     #tweets .tweet {
         width: 90%;
         padding: 3% 5%;
-    }
-    
-    .tweet_image {
-        padding: 0;
-        width: 20%;
-        margin: 0;
-        float: left;
     }
     
     .tweet_text {

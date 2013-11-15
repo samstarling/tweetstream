@@ -25,6 +25,12 @@ server.listen(process.env.PORT || 3000);
 var io = require('socket.io').listen(server);
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.indexOf(str) == 0;
+  };
+}
+
 app.get('/', function (req, res) {
   script_url = 'http://localhost';
   if(process.env.PORT) {
@@ -36,15 +42,16 @@ app.get('/', function (req, res) {
   });
   
   io.sockets.on('connection', function (socket) {
-    twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
+    twit.stream('user', function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
-          if(!data.text.startsWith("RT")) {
-            data.split = data.text.split(" ")
-            socket.volatile.emit('tweet', data);
-          }
+          socket.volatile.emit('tweet', data);
         }
       });
+      stream.on('error', function(error, code) {
+        console.log("Error: " + error + ": " + code);
+      });
+      setTimeout(stream.destroy, 5000);
     });
   });
 });
