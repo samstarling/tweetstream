@@ -2,15 +2,20 @@ var express = require('express');
 var sys = require('sys');
 var twitter = require('twitter');
 var logging = require('node-logging');
+var path = require("path");
+var http = require("http");
+var jade = require("jade");
 
 logging.setLevel('error');
 
-var app = express.createServer();
-app.register('.html', require('jade'));
+var express = require("express");
+var app = express();
+app.set('view engine', 'jade');
 app.set("view options", { layout: false });
-app.listen(process.env.PORT || 3000);
+var server = http.createServer(app);
+server.listen(process.env.PORT || 3000);
 
-var io = require('socket.io').listen(app);
+var io = require('socket.io').listen(server);
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
 if (typeof String.prototype.startsWith != 'function') {
@@ -19,6 +24,7 @@ if (typeof String.prototype.startsWith != 'function') {
   };
 }
 
+
 app.get('/', function (req, res) {
   
   script_url = 'http://localhost';
@@ -26,12 +32,12 @@ app.get('/', function (req, res) {
     script_url = 'http://tweetstream.herokuapp.com';
   }
   
-  res.render(__dirname + '/public/index.html', {
+  res.render('index', {
     script_url: script_url,
     query: query
   });
   
-  var query = "bbc";
+  var query = "from:@gmedia";
   if(req.query["q"]) {
     query = req.query["q"];
   }
@@ -64,9 +70,8 @@ app.get('/timeago.js', function (req, res) {
 });
 
 var twit = new twitter({
-  consumer_key: 'zyg4gPhvZSqLn25x37oUyA',
-  consumer_secret: 'ymTIgmG5DhQzurEHsCD22pgdIFGWIysGT5SEwkuWCk',
-  access_token_key: '571728756-ViiabtEcHk3A2nPWagGHlC1DDauKtruBmdWKZLPE',
-  access_token_secret: '896I1bD2ahsHgnim3O5OOZG1uNUrFXwZb9VUzr4'
+  consumer_key: 'rVGHP96wJj5pJUI1BqFSOg',
+  consumer_secret: 'It4so4h8UIkocgSbjoo2h2nYWy20vNM3KcHdXsxSo',
+  access_token_key: '19527505-fgzYos2tYcjUBjZZSkBDPkbDqQuirEh1tnf0ZrewX',
+  access_token_secret: 'JfpmI7Eh0386jATwFo1jIZtQgsk0Ip2Biu2QACrD40Ofi'
 });
-
