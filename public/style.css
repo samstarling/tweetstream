@@ -19,15 +19,17 @@ h1, h2, h3, p {
 }
 
 #tweets span {
-	float: left;
+  float: left;
+  background: #aaa;
+  word-wrap: normal;
 }
 
 #container {
-	font-size: 70px;
+  font-size: 70px;
 }
 
 .clearboth {
-    clear: both;
+  clear: both;
 }
 
 #tweet {

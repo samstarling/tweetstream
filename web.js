@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
   var query = "from:@gmedia";
   
   io.sockets.on('connection', function (socket) { 
-    twit.stream('user', {track: 'bbc'}, function(stream) {
+    twit.stream('user', {track: '@gmedia'}, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
           if(!data.text.startsWith("RT")) {
