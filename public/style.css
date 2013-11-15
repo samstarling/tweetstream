@@ -22,12 +22,6 @@ h1, h2, h3, p {
 	float: left;
 }
 
-
-
-p {
-    word-wrap: break-word;
-}
-
 #container {
 	font-size: 70px;
 }
