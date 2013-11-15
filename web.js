@@ -18,26 +18,15 @@ server.listen(process.env.PORT || 3000);
 var io = require('socket.io').listen(server);
 io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
 
-if (typeof String.prototype.startsWith != 'function') {
-  String.prototype.startsWith = function (str){
-    return this.indexOf(str) == 0;
-  };
-}
-
-
 app.get('/', function (req, res) {
-  
   script_url = 'http://localhost';
   if(process.env.PORT) {
     script_url = 'http://tweetstream.herokuapp.com';
   }
   
   res.render('index', {
-    script_url: script_url,
-    query: query
+    script_url: script_url
   });
-  
-  var query = "from:@gmedia";
   
   io.sockets.on('connection', function (socket) { 
     twit.stream('user', function(stream) {
@@ -51,7 +40,6 @@ app.get('/', function (req, res) {
       });
     });
   });
-  
 });
 
 app.get('/style.css', function (req, res) {
@@ -67,8 +55,8 @@ app.get('/timeago.js', function (req, res) {
 });
 
 var twit = new twitter({
-  consumer_key: 'rVGHP96wJj5pJUI1BqFSOg',
-  consumer_secret: 'It4so4h8UIkocgSbjoo2h2nYWy20vNM3KcHdXsxSo',
-  access_token_key: '19527505-fgzYos2tYcjUBjZZSkBDPkbDqQuirEh1tnf0ZrewX',
-  access_token_secret: 'JfpmI7Eh0386jATwFo1jIZtQgsk0Ip2Biu2QACrD40Ofi'
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
