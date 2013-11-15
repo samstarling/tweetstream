@@ -1,12 +1,19 @@
 var express = require('express');
 var sys = require('sys');
-var twitter = require('twitter');
+var twitter = require('ntwitter');
 var logging = require('node-logging');
 var path = require("path");
 var http = require("http");
 var jade = require("jade");
 
 logging.setLevel('error');
+
+var twit = new twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});
 
 var express = require("express");
 var app = express();
@@ -28,8 +35,8 @@ app.get('/', function (req, res) {
     script_url: script_url
   });
   
-  io.sockets.on('connection', function (socket) { 
-    twit.stream('user', function(stream) {
+  io.sockets.on('connection', function (socket) {
+    twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
           if(!data.text.startsWith("RT")) {
@@ -54,9 +61,4 @@ app.get('/timeago.js', function (req, res) {
   res.sendfile(__dirname + '/public/timeago.js');
 });
 
-var twit = new twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
+
