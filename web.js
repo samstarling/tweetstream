@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
   });
   
   io.sockets.on('connection', function (socket) { 
-    twit.stream('user', function(stream) {
+    twit.stream('user', { track: "BBC" }, function(stream) {
       stream.on('data', function (data) {
         if(data.text) {
           if(!data.text.startsWith("RT")) {
