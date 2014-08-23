@@ -1,5 +1,7 @@
 {
-  "name": "starling-twitterfall",
+  "name": "tweetstream",
+  "description": "A web app to show tweets on a big screen",
+  "repository": "https://github.com/samstarling/tweetstream",
   "version": "0.0.1",
   "dependencies": {
     "socket.io": "1.0.6",
