@@ -19,4 +19,4 @@ You can then run the application like so:
 
     $ node server.js
 
-Then go to `http://localhost:7080` to view the tweets.
+Finally, go to `http://localhost:7080` to view the tweets.
