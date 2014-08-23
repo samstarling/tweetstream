@@ -1,83 +1,21 @@
-var socket = io.connect('#{script_url}?q=tweet');
-var ready = true;
-var re = /((^|\s)((https?:\/\/)[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?))/gi;
-var max_keep = 100;
-var startup = true;
-var tweets = new Array();
-var display_for_ms = 5500;
-var total = 0;
+$(document).ready(function() {
 
-if (typeof String.prototype.startsWith != 'function') {
-  String.prototype.startsWith = function (str){
-    return this.indexOf(str) == 0;
-  };
-}
+  var tweets = [];
 
-function isUrl(s) {
-  return re.test(s);
-}
-
-function populateTweet(data) {
-  console.log(data);
-  var spans = '<span>' + data.text.split(" ").join('&nbsp;</span><span>') + '</span><span class="screen_name">@' + data.user.screen_name + '</span>&nbsp;<span class="time_since">' + jQuery.timeago(data.created_at) + '</span>';
-  $('#tweet').html("");
-  $(spans).hide().appendTo('#tweet').each(function(i) {
-    if($(this).text().startsWith("@") && !$(this).hasClass('screen_name')) {
-      t = $(this).text().replace(/(@[\w]+)/, '<span class="username">$1</span>')
-      $(this).html(t);
-    } else if($(this).text().startsWith("#")) {
-      t = $(this).text().replace(/(#\w+)/, '<span class="hashtag">$1</span>')
-      $(this).html(t);
-    } else if(isUrl($(this).text())) {
-      t = $(this).text().replace(re, '<span class="link">$1</span>')
-      $(this).html(t);
-    }
-    $(this).delay(10 * i).fadeIn(100);
+  var socket = io();
+  socket.on('tweet', function(data) {
+    tweets.push(data.tweet);
+    $(".stats__pending .data").text(tweets.length);
   });
-}
 
-function clearAndPopulateNextTweet(data) {
-  if($("#tweet span").length == 0) {
-    populateTweet(data);
-  } else {
-    $($("#tweet span").get().reverse()).each(function(i) { 
-      $(this).delay(10 * i).fadeOut(150, function() { 
-        $(this).remove();
-        console.log($("#tweet span").length == 0)
-        if($("#tweet span").length == 0) {
-          setTimeout(function() {
-            populateTweet(data);
-          }, 250);
-        }
-      });
-    });
-    
-  }
-}
-
-function showNextTweet() {
-  var data = tweets.shift();
-  $("#number").html(tweets.length);
-  if(data) {
-    $('#tweet').fadeIn(100, function() {
-      clearAndPopulateNextTweet(data);
-    });
-  }
-}
-
-socket.on('tweet', function (data) {
-  $("#total_number").html(total++);
-  if(data.text) {
-    tweets.push(data);
-    if(tweets.length > max_keep) {
-      var evicted = tweets.splice(max_keep - 1, 1)[0];
-      $("#evicted_tweet").text(evicted.text);
+  setInterval(function() {
+    var tweet = tweets.shift();
+    if(tweet != null) {
+      $(".tweet__text").text(tweet.text);
+      $(".tweet__user").text(tweet.user.screen_name);
+      $(".tweet__time").text(tweet.created_at);
+      console.log(tweet);
+      $(".stats__pending .data").text(tweets.length);
     }
-    if(startup) {
-      showNextTweet();
-      setInterval('showNextTweet()', display_for_ms);
-      startup = false;
-    }
-    $("#number").html(tweets.length);
-  }
+  }, 1000)
 });

@@ -1,7 +1,8 @@
 body {
-    margin: 26px 30px 30px 30px;
+    margin: 40px;
     font-family: 'Helvetica Neue', sans-serif;
     font-weight: 200;
+    font-size: 40px;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -11,91 +12,16 @@ body {
     color: #879DA3;
 }
 
-h1, h2, h3, p {
-    margin: 0;
-    padding: 0;
-    font-weight: 300;
+
+.stats {
+  position: absolute;
+  bottom: 25px;
 }
 
-span {
-  float: left;
-  word-wrap: normal;
+.tweet {
+
 }
 
-#container {
-  font-size: 70px;
-}
-
-.clearboth {
-  clear: both;
-}
-
-#tweet {
-  line-height: 1.2;
-  text-shadow: 0px 2px #002b36;
-}
-
-.pending {
-	opacity: 0.3;
-	position: absolute;
-	bottom: 30px;
-	font-size: 12px;
-	line-height: 12px;
-}
-
-.evicted {
-	opacity: 0.1;
-	position: absolute;
-	bottom: 48px;
-	font-size: 11px;
-	line-height: 12px;
-}
-
-.username {
-	color: #b58900;
-}
-
-.hashtag {
-	color: #2aa198;
-}
-
-.link {
-	color: #268bd2;
-}
-
-.screen_name {
-	color: #586e75 !important;
-	font-size: 50px;
-	clear: left;
-}
-
-.time_since {
-	font-weight: 100;
-	color: #586e75 !important;
-	font-size: 50px;
-	opacity: 0.4;
-  padding-left: 0.3em;
-}
-
-#tweets .tweet {
-    padding: 10px 20px 10px 20px;
-}
-
-.content {
-    padding: 0px;
-}
-
-@media only screen and (max-width:600px) {
-    #container {
-        width: 100%;
-    }
-    #tweets .tweet {
-        width: 90%;
-        padding: 3% 5%;
-    }
-    
-    .tweet_text {
-        padding: 0;
-        width: 80%;
-    }
+.tweet__user::before {
+  content: "@";
 }

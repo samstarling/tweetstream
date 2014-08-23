@@ -1,4 +1,4 @@
-!!! 5
+doctype
 html(lang="en")
   head
     title Tweetstream
@@ -6,19 +6,14 @@ html(lang="en")
     link(href='http://fonts.googleapis.com/css?family=Nobile', rel='stylesheet', type='text/css')
     link(href='/style.css', rel='stylesheet', type='text/css')
     script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    script(type='text/javascript', src='/timeago.js')
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript', src='/tweets.js')
   body
     #container
-      .content 
-        p.pending
-          span#number 0
-          span &nbsp;queued /&nbsp;
-          span#total_number 0
-          span &nbsp;total
-        p.evicted Evicted:&nbsp;
-          span#evicted_tweet
-        div#tweet
-          span Awaiting first tweet.
-        .clearboth 
+      .tweet
+        .tweet__text ...
+        .tweet__user ...
+        .tweet__time ...
+      .stats
+        .stats__pending
+          span.data

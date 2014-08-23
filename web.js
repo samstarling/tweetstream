@@ -1,12 +1,11 @@
 var express = require('express');
 var sys = require('sys');
-var twitter = require('ntwitter');
+var twitter = require('twitter');
 var logging = require('node-logging');
 var path = require("path");
 var http = require("http");
 var jade = require("jade");
-
-logging.setLevel('error');
+var util = require('util');
 
 var twit = new twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -19,53 +18,18 @@ var express = require("express");
 var app = express();
 app.set('view engine', 'jade');
 app.set("view options", { layout: false });
+app.use(express.static(__dirname + '/public'));
 var server = http.createServer(app);
 server.listen(process.env.PORT || 3000);
 
 var io = require('socket.io').listen(server);
-io.set('transports', ['xhr-polling']); io.set('polling duration', 10);
-
-if (typeof String.prototype.startsWith != 'function') {
-  String.prototype.startsWith = function (str){
-    return this.indexOf(str) == 0;
-  };
-}
 
 app.get('/', function (req, res) {
-  script_url = 'http://localhost';
-  if(process.env.PORT) {
-    script_url = 'http://tweetstream.herokuapp.com';
-  }
-  
-  res.render('index', {
-    script_url: script_url
-  });
-  
-  io.sockets.on('connection', function (socket) {
-    twit.stream('user', function(stream) {
-      stream.on('data', function (data) {
-        if(data.text) {
-          socket.volatile.emit('tweet', data);
-        }
-      });
-      stream.on('error', function(error, code) {
-        console.log("Error: " + error + ": " + code);
-      });
-      setTimeout(stream.destroy, 5000);
+  res.render('index');
+});
+
+twit.stream('statuses/filter', { track: 'Manchester' }, function(stream) {
+    stream.on('data', function(data) {
+        io.sockets.emit('tweet', { tweet: data });
     });
-  });
 });
-
-app.get('/style.css', function (req, res) {
-  res.sendfile(__dirname + '/public/style.css');
-});
-
-app.get('/tweets.js', function (req, res) {
-  res.sendfile(__dirname + '/public/tweets.js');
-});
-
-app.get('/timeago.js', function (req, res) {
-  res.sendfile(__dirname + '/public/timeago.js');
-});
-
-
