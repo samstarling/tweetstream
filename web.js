@@ -24,7 +24,7 @@ app.engine('html', require('hogan-express'))
 
 app.use(express.static(__dirname + '/public'));
 var server = http.createServer(app);
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 7080);
 
 var io = require('socket.io').listen(server);
 
