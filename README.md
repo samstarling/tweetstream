@@ -1,5 +1,7 @@
 # tweetstream
 
+![](https://www.versioneye.com/user/projects/53f8ca8de09da3d172000370/badge.svg?style=flat)
+
 `tweetstream` is a Node.js app that's designed to show the results of a Twitter search on a big screen. It uses Twitter's streaming API to track a particular keyword, and then uses WebSockets to stream these to the front-end. The tweets are then queued up in the front end, and a new one is shown every 6 seconds.
 
 ![](https://raw.githubusercontent.com/samstarling/tweetstream/master/docs/screenshot.png)
