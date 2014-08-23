@@ -22,6 +22,18 @@ body {
 
 }
 
+.tweet__text .username {
+  color: red;
+}
+
+.tweet__text .hashtag {
+  color: blue;
+}
+
+.tweet__text .url {
+  color: yellow;
+}
+
 .tweet__user::before {
 
 }
