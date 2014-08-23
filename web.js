@@ -16,8 +16,12 @@ var twit = new twitter({
 
 var express = require("express");
 var app = express();
-app.set('view engine', 'jade');
-app.set("view options", { layout: false });
+
+app.set('view engine', 'html')
+app.set('layout', 'layout')
+app.enable('view cache')
+app.engine('html', require('hogan-express'))
+
 app.use(express.static(__dirname + '/public'));
 var server = http.createServer(app);
 server.listen(process.env.PORT || 3000);
