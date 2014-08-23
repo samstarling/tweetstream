@@ -14,7 +14,6 @@ $(document).ready(function() {
       $(".tweet__text").text(tweet.text);
       $(".tweet__user").text(tweet.user.screen_name);
       $(".tweet__time").text(tweet.created_at);
-      console.log(tweet);
       $(".stats__pending .data").text(tweets.length);
     }
   }, 1000)

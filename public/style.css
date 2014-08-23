@@ -23,5 +23,4 @@ body {
 }
 
 .tweet__user::before {
-  content: "@";
 }
