@@ -8,8 +8,8 @@ body {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    background: #073642;
-    color: #879DA3;
+    background: #181818;
+    color: #ddd;
 }
 
 
@@ -18,24 +18,29 @@ body {
   bottom: 30px;
 }
 
-.tweet {
-
+.tweet__text {
+  font-size: 120%;
 }
 
 .tweet__text .username {
-  color: red;
+  color: #DD6668;
 }
 
 .tweet__text .hashtag {
-  color: blue;
+  color: #8DB7E0;
 }
 
 .tweet__text .url {
-  color: yellow;
+  color: #C5D064;
 }
 
-.tweet__user::before {
+.tweet__user {
+  margin-top: 20px;
+}
 
+.tweet__time {
+  opacity: 0.6;
+  font-size: 80%;
 }
 
 .stats {

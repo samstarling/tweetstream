@@ -19,9 +19,10 @@ $(document).ready(function() {
     var tweet = tweets.shift();
     if(tweet != null) {
       $(".tweet__text").html(parseTweet(tweet.text));
-      $(".tweet__user").text(tweet.user.screen_name);
-      $(".tweet__time").text(tweet.created_at);
+      $(".tweet__user").text("@" + tweet.user.screen_name);
+      $(".tweet__time abbr").attr('title', tweet.created_at);
+      $(".timeago").timeago();
       $(".stats__pending .data").text(tweets.length);
     }
-  }, 1000)
+  }, 6000)
 });
