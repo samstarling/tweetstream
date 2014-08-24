@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var twitter = require('twitter');
+var config = require('./config.json');
 
 var twit = new twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -27,8 +28,14 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-twit.stream('statuses/filter', { track: '#instagram' }, function(stream) {
+var bannedWords = config.bannedWords.join("|");
+
+twit.stream('statuses/filter', { track: 'Manchester' }, function(stream) {
     stream.on('data', function(data) {
-        io.sockets.emit('tweet', { tweet: data });
+        if (new RegExp(bannedWords, "i").test(data.text) == false) {
+            io.sockets.emit('tweet', {
+                tweet: data
+            });
+        }
     });
 });
