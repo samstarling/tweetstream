@@ -1,11 +1,6 @@
 var express = require('express');
-var sys = require('sys');
+var http = require('http');
 var twitter = require('twitter');
-var logging = require('node-logging');
-var path = require("path");
-var http = require("http");
-var jade = require("jade");
-var util = require('util');
 
 var twit = new twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
