@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-twit.stream('statuses/filter', { track: 'Manchester' }, function(stream) {
+twit.stream('statuses/filter', { track: '#instagram' }, function(stream) {
     stream.on('data', function(data) {
         io.sockets.emit('tweet', { tweet: data });
     });

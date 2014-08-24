@@ -8,10 +8,9 @@ body {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    background: #181818;
+    background: #222;
     color: #ddd;
 }
-
 
 .stats {
   position: absolute;
@@ -20,6 +19,10 @@ body {
 
 .tweet__text {
   font-size: 120%;
+}
+
+.tweet__text span {
+  float: left;
 }
 
 .tweet__text .username {
@@ -34,13 +37,28 @@ body {
   color: #C5D064;
 }
 
+.tweet__user, .tweet__time {
+  background: #181818;
+  padding: 0 15px;
+}
+
 .tweet__user {
+  position: absolute;
+  bottom: 120px;
   margin-top: 20px;
+  float: left;
+  clear: left;
 }
 
 .tweet__time {
-  opacity: 0.6;
-  font-size: 80%;
+  position: absolute;
+  bottom: 63px;
+  color: #666;
+  font-size: 60%;
+  float: left;
+  clear: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .stats {
