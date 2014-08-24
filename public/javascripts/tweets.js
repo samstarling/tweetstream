@@ -21,13 +21,10 @@ $(document).ready(function() {
           .replace(/(#\w+)/g, "<span class='hashtag'>\$1</span>")
           .replace(/\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i, "<span class='url'>\$1</span>");
       });
-
-
-
       $(".tweet__user").text("@" + tweet.user.screen_name);
       $(".tweet__time abbr").attr('title', tweet.created_at);
       $(".timeago").timeago();
       $(".stats__pending .data").text(tweets.length);
     }
-  }, 3000)
+  }, 6000)
 });
