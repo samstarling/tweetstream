@@ -15,6 +15,7 @@ body {
 .stats {
   position: absolute;
   bottom: 30px;
+  right: 30px;
 }
 
 .tweet__text {
@@ -44,7 +45,7 @@ body {
 
 .tweet__user {
   position: absolute;
-  bottom: 120px;
+  bottom: 86px;
   margin-top: 20px;
   float: left;
   clear: left;
@@ -52,7 +53,7 @@ body {
 
 .tweet__time {
   position: absolute;
-  bottom: 63px;
+  bottom: 30px;
   color: #666;
   font-size: 60%;
   float: left;
