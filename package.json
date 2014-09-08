@@ -4,10 +4,10 @@
   "repository": "https://github.com/samstarling/tweetstream",
   "version": "0.0.1",
   "dependencies": {
-    "socket.io": "1.0.6",
-    "twitter": "0.2.9",
+    "socket.io": "1.1.0",
+    "twitter": "0.2.11",
     "node-logging": "0.1.6",
-    "express": "4.8.5",
+    "express": "4.8.8",
     "hogan-express": "^0.5.2"
   }
 }
