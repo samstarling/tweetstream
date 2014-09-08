@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 var bannedWords = config.bannedWords.join("|");
 
-twit.stream('statuses/filter', { track: 'Manchester' }, function(stream) {
+twit.stream('statuses/filter', { track: config.keyword }, function(stream) {
     stream.on('data', function(data) {
         if (new RegExp(bannedWords, "i").test(data.text) == false) {
             io.sockets.emit('tweet', {
