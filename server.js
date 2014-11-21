@@ -13,10 +13,10 @@ var twit = new twitter({
 var express = require("express");
 var app = express();
 
-app.set('view engine', 'html')
-app.set('layout', 'layout')
-app.enable('view cache')
-app.engine('html', require('hogan-express'))
+app.set('view engine', 'html');
+app.set('layout', 'layout');
+app.enable('view cache');
+app.engine('html', require('hogan-express'));
 
 app.use(express.static(__dirname + '/public'));
 var server = http.createServer(app);
@@ -28,14 +28,13 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-var bannedWords = config.bannedWords.join("|");
+var bannedWords = config.bannedWords.join('|');
 
-twit.stream('statuses/filter', { track: config.keyword }, function(stream) {
-    stream.on('data', function(data) {
-        if (new RegExp(bannedWords, "i").test(data.text) == false) {
-            io.sockets.emit('tweet', {
-                tweet: data
-            });
-        }
-    });
+twit.stream('statuses/filter', {track:config.keyword }, function(stream) {
+  stream.on('data', function(data) {
+    var containsBannedWord = new RegExp(bannedWords, 'i').test(data.text) === true;
+    if (!containsBannedWord) {
+      io.sockets.emit('tweet', { tweet: data });
+    }
+  });
 });
