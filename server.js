@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 var bannedWords = config.bannedWords.join('|');
 
-twit.stream('statuses/filter', {track:config.keyword }, function(stream) {
+twit.stream('statuses/filter', { track: config.keyword }, function(stream) {
   stream.on('data', function(data) {
     var containsBannedWord = new RegExp(bannedWords, 'i').test(data.text) === true;
     if (!containsBannedWord) {
